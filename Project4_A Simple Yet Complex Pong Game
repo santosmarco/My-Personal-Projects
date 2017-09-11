@@ -1,0 +1,213 @@
+from sense_hat import SenseHat
+from time import sleep, time
+from random import randint, choice
+
+sense = SenseHat()
+
+class Game():
+    
+    def __init__(self):
+        self.bkg_color = (0, 48, 72)
+        self.sleep_time = 0.25
+        self.currently_power_up_on_map = 0
+        self.power_up_start_time = 0
+        self.pontos = 0
+        
+    def generate_warfield(self, senseHat, powerup, bat):
+        senseHat.clear(self.bkg_color)
+        if self.currently_power_up_on_map != 0:
+            senseHat.set_pixel(powerup.position[0], powerup.position[1], powerup.color)
+        if self.power_up_start_time != 0:
+            if time()-self.power_up_start_time > 3:
+                self.power_up_start_time = 0
+                self.sleep_time = 0.25
+                bat.size = 3
+        
+    def lose_animation(self, senseHat):
+        #Animação:
+        pixelsFora = []
+        while len(pixelsFora) < 64:
+            xPixel = randint(0, 7)
+            yPixel = randint(0, 7)
+            if [xPixel, yPixel] not in pixelsFora:
+                senseHat.set_pixel(xPixel, yPixel, 0, 0, 0)
+                pixelsFora.append([xPixel, yPixel])
+                sleep(0.005)
+        sleep(0.15)
+        #Mensagem:
+        senseHat.show_message('Perdeu :(  Seu total: {} pontos'.format(self.pontos), 0.06, (240, 124, 0), self.bkg_color)
+        #Remove o fundo azul:
+        for n in range(7,-1,-1):
+            for m in range(8):
+                sense.set_pixel(n, m, (0, 0, 0))
+            sleep(0.05)
+        #Fecha:
+        quit()
+
+class Bat():
+    
+    def __init__(self, posX=0):
+        self.color = (240, 124, 0)
+        self.position = [posX, 3]
+        self.all_positions = [[], [], [], [0, 3], [0, 4], [0, 5], [], []]
+        self.last_position = [posX, 3]
+        self.size = 3
+        
+    def draw(self, senseHat):
+        if self.position[1]+self.size-1 > 7:
+            for n in range(self.size-1):
+                senseHat.set_pixel(self.position[0], self.position[1]+n, self.color)
+        else:
+            for n in range(self.size):
+                senseHat.set_pixel(self.position[0], self.position[1]+n, self.color)
+        
+    def go_up(self, event):
+        if event.action == 'pressed' and self.position[1] > 0:
+            self.last_position[1] = self.position[1]
+            self.position[1] -= 1
+    
+    def go_down(self, event):
+        if event.action == 'pressed' and self.position[1] <= 7-self.size:
+            self.last_position[1] = self.position[1]
+            self.position[1] += 1
+
+class Ball():
+
+    def __init__(self):
+        self.color = (255, 255, 255)
+        self.position = [randint(3, 5), randint(3, 5)]
+        self.all_time_positions = []
+        self.velocity = [1, 1]
+        self.size = 1
+        
+    def draw(self, senseHat):
+        senseHat.set_pixel(self.position[0], self.position[1], self.color)
+
+    def move(self, bat, senseHat, game, powerup):
+        if self.position[0] == 1:
+            if bat.position[1] <= self.position[1] <= bat.position[1]+bat.size-1:
+                self.velocity[0] = -self.velocity[0]
+                game.pontos += 1
+            else:
+                game.lose_animation(senseHat)
+        elif self.position[0] == 6:
+            self.velocity[0] = -self.velocity[0]
+        if self.position[1] == 0 or self.position[1] == 7:
+            self.velocity[1] = -self.velocity[1]
+        if game.currently_power_up_on_map != 0:
+            if self.position[0] == powerup.position[0] and self.position[1] == powerup.position[1]:
+                if powerup.type == 1:
+                    game.sleep_time = 0.1
+                    game.power_up_start_time = time()
+                    game.currently_power_up_on_map = 0
+                elif powerup.type == 2:
+                    game.sleep_time = 0.35
+                    game.power_up_start_time = time()
+                    game.currently_power_up_on_map = 0
+                elif powerup.type == 3:
+                    bat.size = 2
+                    game.power_up_start_time = time()
+                    game.currently_power_up_on_map = 0
+                elif powerup.type == 4:
+                    bat.size = 4
+                    game.power_up_start_time = time()
+                    game.currently_power_up_on_map = 0
+                powerup.power_up_existence = False
+        self.position[0] += self.velocity[0]
+        self.position[1] += self.velocity[1]
+        if len(self.all_time_positions) < 25:
+            self.all_time_positions.append([self.position[0], self.position[1]])
+        
+class PowerUp():
+    
+    def __init__(self):
+        self.color_if_bad = (214, 40, 40)
+        self.color_if_good = (117, 171, 0)
+        self.power_up_existence = False
+        
+    def try_to_create_one(self, game, chosen_number, ball):    
+        if chosen_number == 2 and not self.power_up_existence:
+            self.power_up_existence = True
+            self.type = randint(1, 4)
+            #Mais speed
+            if self.type == 1:
+                game.currently_power_up_on_map = 1
+                self.color = self.color_if_bad
+                self.position = choice(ball.all_time_positions)
+            #Menos speed
+            if self.type == 2:
+                game.currently_power_up_on_map = 2
+                self.color = self.color_if_good
+                self.position = choice(ball.all_time_positions)
+            #Menos tamanho
+            if self.type == 3:
+                game.currently_power_up_on_map = 3
+                self.color = self.color_if_bad
+                self.position = choice(ball.all_time_positions)
+            #Mais tamanho
+            if self.type == 4:
+                game.currently_power_up_on_map = 4
+                self.color = self.color_if_good
+                self.position = choice(ball.all_time_positions)
+                
+#-----
+
+game = Game()
+player_bat = Bat()
+enemy_bat = Bat(7)
+ball = Ball()
+power_up = PowerUp()
+
+sense.stick.direction_up = player_bat.go_up
+sense.stick.direction_down = player_bat.go_down
+
+sense.clear()
+
+#Animação de início
+for n in range(8):
+    i = n
+    p = 0
+    while p != n+1:
+        sense.set_pixel(i, p, game.bkg_color)
+        i -= 1
+        p += 1
+    sleep(0.03)
+for n in range(1, 8):
+    i = 7
+    p = n
+    while i != n-1:
+        sense.set_pixel(i, p, game.bkg_color)
+        i -= 1
+        p += 1
+    sleep(0.03)
+
+#Loop principal
+while True:
+    
+    #Gera/Atualiza o LED Matrix
+    game.generate_warfield(sense, power_up, player_bat)
+    
+    #Cria os dois bats e a bola
+    player_bat.draw(sense)
+    enemy_bat.draw(sense)
+    ball.draw(sense)
+    
+    #Move a bola
+    ball.move(player_bat, sense, game, power_up)
+    
+    #Move o bat inimigo de acordo com a bola
+    if ball.velocity[1] < 0:
+        if enemy_bat.position[1] > 0:
+            enemy_bat.last_position[1] = enemy_bat.position[1]
+            enemy_bat.position[1] -= 1
+    elif ball.velocity[1] > 0:
+        if enemy_bat.position[1] <= 7-enemy_bat.size:
+            enemy_bat.last_position[1] = enemy_bat.position[1]
+            enemy_bat.position[1] += 1
+            
+    #Tenta criar um power-up
+    chosen_number = randint(0, 15)
+    power_up.try_to_create_one(game, chosen_number, ball)
+            
+    #Tempo de refresh        
+    sleep(game.sleep_time)
