@@ -1,0 +1,36 @@
+rom sense_hat import SenseHat
+from random import randint
+from time import sleep
+
+sense = SenseHat()
+
+sense.clear()
+sleep(0.3)
+
+pixelsAtuais = []
+time = 0.3
+
+#Seta os pixels (de zero a colorido)
+while len(pixelsAtuais) < 64:
+    ultimosPixels = []
+    cor = []
+    x = randint(0, 7)
+    ultimosPixels.append(x)
+    y = randint(0, 7)
+    ultimosPixels.append(y)
+    if ultimosPixels in pixelsAtuais:
+        continue
+    pixelsAtuais.append(ultimosPixels)
+    for n in range(3):
+        cor.append(randint(0, 255))
+    sense.set_pixel(x, y, (cor[0], cor[1], cor[2]))
+    sleep(time)
+    if time > 0.08:
+        time -= 0.01
+
+#Troca as cores dos pixels (depois de coloridos)
+while True:
+    sense.set_pixel(randint(0, 7), randint(0, 7), (randint(0, 255),
+                                                   randint(0, 255),
+                                                   randint(0, 255)))
+    sleep(time)
