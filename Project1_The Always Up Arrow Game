@@ -1,0 +1,306 @@
+from sense_hat import SenseHat
+from time import sleep, time
+from random import randint
+
+sense = SenseHat()    #Inicia o sense-hat
+
+#Inicia as cores
+cor_seta = c = (255,255,255)           #Branco
+cor_seta_vermelho = r = (214,40,40)    #Vermelho
+cor_seta_verde = g = (117,171,0)       #Verde
+cor_fundo = a = (0,48,73)              #Azul do fundo
+cor_sombra_fundo = b = (247,127,0)     #Laranja da sombra do fundo
+cor_empty = e = (0,0,0)                #Preto (ausência de cor)
+
+#Inicia as configurações dos pixels
+fundo_vazio = [
+    a,a,a,a,a,a,a,e,
+    a,a,a,a,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+seta_up = [
+    a,a,a,c,a,a,a,e,
+    a,a,c,c,c,a,a,b,
+    a,c,c,c,c,c,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+seta_down = [
+    a,a,a,c,a,a,a,e,
+    a,a,a,c,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,c,c,c,c,c,a,b,
+    a,a,c,c,c,a,a,b,
+    a,a,a,c,a,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+seta_left = [
+    a,a,a,a,a,a,a,e,
+    a,a,c,a,a,a,a,b,
+    a,c,c,a,a,a,a,b,
+    c,c,c,c,c,c,c,b,
+    a,c,c,a,a,a,a,b,
+    a,a,c,a,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+seta_right = [
+    a,a,a,a,a,a,a,e,
+    a,a,a,a,c,a,a,b,
+    a,a,a,a,c,c,a,b,
+    c,c,c,c,c,c,c,b,
+    a,a,a,a,c,c,a,b,
+    a,a,a,a,c,a,a,b,
+    a,a,a,a,a,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+seta_45 = [
+    a,a,a,a,c,c,c,e,
+    a,a,a,a,a,c,c,b,
+    a,a,a,a,c,a,c,b,
+    a,a,a,c,a,a,a,b,
+    a,a,c,a,a,a,a,b,
+    a,c,a,a,a,a,a,b,
+    c,a,a,a,a,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+seta_135 = [
+    c,a,a,a,a,a,a,e,
+    a,c,a,a,a,a,a,b,
+    a,a,c,a,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,a,c,a,c,b,
+    a,a,a,a,a,c,c,b,
+    a,a,a,a,c,c,c,b,
+    e,b,b,b,b,b,b,b
+    ]
+seta_225 = [
+    a,a,a,a,a,a,c,e,
+    a,a,a,a,a,c,a,b,
+    a,a,a,a,c,a,a,b,
+    a,a,a,c,a,a,a,b,
+    c,a,c,a,a,a,a,b,
+    c,c,a,a,a,a,a,b,
+    c,c,c,a,a,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+seta_315 = [
+    c,c,c,a,a,a,a,e,
+    c,c,a,a,a,a,a,b,
+    c,a,c,a,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,a,c,a,a,b,
+    a,a,a,a,a,c,a,b,
+    a,a,a,a,a,a,c,b,
+    e,b,b,b,b,b,b,b
+    ]
+
+#Inicia as configurações dos pixels para a contagem regressiva
+tres = [
+    a,c,c,c,c,c,a,e,
+    a,a,a,a,c,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,a,c,a,a,b,
+    a,a,a,a,a,c,a,b,
+    a,c,a,a,a,c,a,b,
+    a,a,c,c,c,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+dois = [
+    a,a,c,c,c,a,a,e,
+    a,c,a,a,a,c,a,b,
+    a,a,a,a,a,c,a,b,
+    a,a,a,a,c,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,c,a,a,a,a,b,
+    a,c,c,c,c,c,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+um = [
+    a,a,a,c,a,a,a,e,
+    a,a,c,c,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,c,c,c,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+
+#Organiza as setas em uma list própria
+setas = [seta_up, seta_down, seta_left, seta_right, seta_45, seta_135, seta_225, seta_315]
+
+sense.clear()    #Limpa para começar
+
+#Loop principal
+while True:
+    
+    #Inicia se sacudir
+    while True:
+        if abs(sense.get_accelerometer_raw()['x']) > 2 or abs(sense.get_accelerometer_raw()['y']) > 2 or abs(sense.get_accelerometer_raw()['z']) > 2:
+            break
+            
+    #Animação de início
+    for n in range(8):
+        i = n
+        p = 0
+        while p != n+1:
+            cor = a
+            if (i == 7 and p == 0) or (i == 0 and p == 7):
+                cor = e
+            sense.set_pixel(i, p, cor)
+            i -= 1
+            p += 1
+        sleep(0.03)
+    for n in range(1, 8):
+        i = 7
+        p = n
+        while i != n-1:
+            cor = a
+            if (i == 7 and p == n) or (i == n and p == 7):
+                cor = b
+            sense.set_pixel(i, p, cor)
+            i -= 1
+            p += 1
+        sleep(0.03)
+
+    #Algumas variáveis importantes
+    continua = 1           #Variável que indica se é jogo principal ou não
+    time_limit = 2.4       #Tempo-limite inicial em segundos
+    pontos = 0             #Jogador começa com 0 pontos
+    ultimoAleatorio = 8    #Inicia a variável ultimoAleatorio, que impede repetição de seta
+    
+    #Contagem regressiva
+    sense.set_pixels(tres)
+    sleep(1)
+    sense.set_pixels(dois)
+    sleep(1)
+    sense.set_pixels(um)
+    sleep(1)
+    
+    #Loop do jogo principal
+    while continua == 1:
+        
+        #Algumas variáveis importantes
+        setaAnimacao = []      #É a seta das animações de vitória ou derrota
+        win = 0                #Zera o win para mais uma rodada (indica se ganhou)
+        start_time = time()    #Hora de início do jogo principal
+        
+        #Escolhe a seta-objetivo
+        aleatorio = randint(0,7)
+        while aleatorio == ultimoAleatorio:    #Não deixa que a mesma seta seja escolhida duas vezes
+            aleatorio = randint(0,7)
+        ultimoAleatorio = aleatorio
+        setaEscolhida = setas[aleatorio]
+        sense.set_pixels(setaEscolhida)
+        
+        #Para onde está apontando o Raspberry? (Checagem contínua)
+        while True:
+            
+            #Acessando o acelerômetro
+            x = round(sense.get_accelerometer_raw()['x'],0)    #Acessa acelerômetro x
+            y = round(sense.get_accelerometer_raw()['y'],0)    #Acessa acelerômetro y
+            
+            #Checagem cruzada: seta-objetivo com acelerômetro atual
+            if setaEscolhida == seta_up and y == 1:
+                win = 1
+            elif setaEscolhida == seta_down and y == -1:
+                win = 1
+            elif setaEscolhida == seta_left and x == 1:
+                win = 1
+            elif setaEscolhida == seta_right and x == -1:
+                win = 1
+            elif setaEscolhida == seta_45 and x == -1 and y == 1:
+                win = 1
+            elif setaEscolhida == seta_135 and y == -1 and x == -1:
+                win = 1
+            elif setaEscolhida == seta_225 and x == 1 and y == -1:
+                win = 1
+            elif setaEscolhida == seta_315 and y == 1 and x == 1:
+                win = 1
+                
+            #Quando a seta-objetivo estiver pra cima (vitória), define win = 1 (casos if-elif acima). Se win == 1, inicia animação de vitória
+            if win == 1:
+                
+                #Animação de vitória
+                for element in setaEscolhida:
+                    if element == c:
+                        setaAnimacao.append(g)
+                    else:
+                        setaAnimacao.append(element)
+                sense.set_pixels(setaAnimacao)
+                sleep(0.5)
+                for n in range(3):
+                    sense.set_pixels(setaEscolhida)
+                    sleep(0.1)
+                    sense.set_pixels(setaAnimacao)
+                    sleep(0.1)
+                sense.set_pixels(setaEscolhida)
+                
+                #Diminui o tempo-limite para deixar mais difícil (mínimo de 0.6 segundo)
+                if time_limit >= 0.9:
+                    time_limit -= 0.3
+                    
+                #Soma 1 ponto    
+                pontos += 1
+                
+                break
+            
+            elapsed_time = time() - start_time    #Se checou e não detectou vitória, conta tempo passado para conferir com tempo-limite
+            
+            #Derrota: se tempo passado > tempo-limite
+            if elapsed_time > time_limit:
+                
+                #Animação de derrota
+                for element in setaEscolhida:
+                    if element == c:
+                        setaAnimacao.append(r)
+                    else:
+                        setaAnimacao.append(element)
+                sense.set_pixels(setaAnimacao)
+                sleep(0.5)
+                for n in range(3):
+                    sense.set_pixels(setaEscolhida)
+                    sleep(0.1)
+                    sense.set_pixels(setaAnimacao)
+                    sleep(0.1)
+                sense.set_pixels(setaEscolhida)
+                sleep(1)
+                
+                #Animação de varredura da tela
+                for n in range(8):
+                    for m in range(8):
+                        sense.set_pixel(n, m, e)
+                    sleep(0.05)
+                for n in range(7,-1,-1):
+                    for m in range(8):
+                        sense.set_pixel(n, m, a)
+                    sleep(0.05)
+                    
+                #Animação de pontuação
+                if pontos == 1 or pontos == 0:
+                    sense.show_message('Seu total: {} ponto'.format(pontos), 0.06, text_colour=c, back_colour=a)
+                else:
+                    sense.show_message('Seu total: {} pontos'.format(pontos), 0.06, text_colour=c, back_colour=a)
+                
+                #Defina continua = 0 para não rodar o loop do jogo principal de novo
+                continua = 0
+                
+                break
+            
+    sleep(0.3)
+    
+    #Animação de limpagem da tela
+    for n in range(7,-1,-1):
+        for m in range(8):
+            sense.set_pixel(n, m, e)
+        sleep(0.05)
