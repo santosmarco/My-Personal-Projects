@@ -1,0 +1,227 @@
+from sense_hat import SenseHat
+from time import sleep, strftime
+from random import randint
+
+sense = SenseHat()    #Inicia o sense-hat
+
+#Inicia as cores
+cor_fundo = a = (0, 48, 73)       #Azul-escuro do fundo
+cor_sombra = b = (247, 127, 0)    #Laranja da sombra do fundo
+empty = e = (0, 0, 0)             #Preto
+branco = w = (255, 255, 255)      #Branco (ponteiro das horas)
+amarelo = (255, 255, 0)           #Amarelo (ponteiro dos minutos)
+center = c = (44, 234, 163)       #Azul-claro (centro do relógio)
+
+#Inicia o background do relógio
+relogio = [
+    a,a,a,a,a,a,a,e,
+    a,a,a,a,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    a,a,a,c,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    a,a,a,a,a,a,a,b,
+    e,b,b,b,b,b,b,b
+    ]
+
+#Introduz os pixels do background pro sense-hat
+sense.set_pixels(relogio)
+
+#Inicia e zera algumas variáveis importantes
+switch = [0, 0]
+ultimoSwitch = [0, 0]
+
+#Inicia a variável de memória das posições dos pixels
+ultimaImagem = sense.get_pixels()
+
+#Loop principal
+while True:
+    
+    #Coleta hora e minuto
+    h = int(strftime('%H'))%12
+    m = int(strftime('%M'))+(int(strftime('%S'))/60)
+    tM = 60*h+m    #totalMinutes
+    
+    #Aciona modo noturno (ou não)
+    if int(strftime('%H')) >= 22 or int(strftime('%H')) <= 6:
+        if sense.low_light == False: sense.low_light = True
+    else:
+        if sense.low_light == True: sense.low_light = False
+
+    #Ponteiro dos minutos
+    if m >= 15/4 and m < 3*15/4:
+        switch[0] = 1
+        if switch[0] != ultimoSwitch[0]:
+            sense.set_pixels(relogio)
+            ultimoSwitch[1] += 10
+            for n in range(0, 3):
+                sense.set_pixel(6-n, n, amarelo)
+    elif m >= 3*15/4 and m < 75/4:
+        switch[0] = 2
+        if switch[0] != ultimoSwitch[0]:
+            sense.set_pixels(relogio)
+            ultimoSwitch[1] += 10
+            for n in range(1, 4):
+                sense.set_pixel(3+n, 3, amarelo)
+    elif m >= 75/4 and m < 105/4:
+        switch[0] = 3
+        if switch[0] != ultimoSwitch[0]:
+            sense.set_pixels(relogio)
+            ultimoSwitch[1] += 10
+            for n in range(0, 3):
+                sense.set_pixel(6-n, 6-n, amarelo)
+    elif m >= 105/4 and m < (75+60)/4:
+        switch[0] = 4
+        if switch[0] != ultimoSwitch[0]:
+            sense.set_pixels(relogio)
+            ultimoSwitch[1] += 10
+            for n in range(0, 3):
+                sense.set_pixel(3, 6-n, amarelo)
+    elif m >= (75+60)/4 and m < (30+45+90)/4:
+        switch[0] = 5
+        if switch[0] != ultimoSwitch[0]:
+            sense.set_pixels(relogio)
+            ultimoSwitch[1] += 10
+            for n in range(0, 3):
+                sense.set_pixel(n, 6-n, amarelo)
+    elif m >= (30+45+90)/4 and m < 195/4:
+        switch[0] = 6
+        if switch[0] != ultimoSwitch[0]:
+            sense.set_pixels(relogio)
+            ultimoSwitch[1] += 10
+            for n in range(0, 3):
+                sense.set_pixel(n, 3, amarelo)
+    elif m >= 195/4 and m < (105+120)/4:
+        switch[0] = 7
+        if switch[0] != ultimoSwitch[0]:
+            sense.set_pixels(relogio)
+            ultimoSwitch[1] += 10
+            for n in range(0, 3):
+                sense.set_pixel(n, n, amarelo)
+    else:
+        switch[0] = 8
+        if switch[0] != ultimoSwitch[0]:
+            sense.set_pixels(relogio)
+            ultimoSwitch[1] += 10
+            for n in range(0, 3):
+                sense.set_pixel(3, n, amarelo)
+
+    #Ponteiro das horas
+    if tM >= 45 and tM < 135:
+        switch[1] = 1
+        if switch[1] != ultimoSwitch[1]:
+            for n in range(len(ultimaImagem)):
+                if ultimaImagem[n] == [248, 252, 248]:
+                    sense.set_pixel(n%8, int(n/8), a)
+            for n in range(1, 3):
+                sense.set_pixel(6-n, n, w)
+    elif tM >= 135 and tM < 225:
+        switch[1] = 2
+        if switch[1] != ultimoSwitch[1]:
+            for n in range(len(ultimaImagem)):
+                if ultimaImagem[n] == [248, 252, 248]:
+                    sense.set_pixel(n%8, int(n/8), a)
+            for n in range(1, 3):
+                sense.set_pixel(6-n, 3, w)
+    elif tM >= 225 and tM < 315:
+        switch[1] = 3
+        if switch[1] != ultimoSwitch[1]:
+            for n in range(len(ultimaImagem)):
+                if ultimaImagem[n] == [248, 252, 248]:
+                    sense.set_pixel(n%8, int(n/8), a)
+            for n in range(1, 3):
+                sense.set_pixel(6-n, 6-n, w)
+    elif tM >= 315 and tM < 405:
+        switch[1] = 4
+        if switch[1] != ultimoSwitch[1]:
+            for n in range(len(ultimaImagem)):
+                if ultimaImagem[n] == [248, 252, 248]:
+                    sense.set_pixel(n%8, int(n/8), a)
+            for n in range(1, 3):
+                sense.set_pixel(3, 6-n, w)
+    elif tM >= 405 and tM < 495:
+        switch[1] = 5
+        if switch[1] != ultimoSwitch[1]:
+            for n in range(len(ultimaImagem)):
+                if ultimaImagem[n] == [248, 252, 248]:
+                    sense.set_pixel(n%8, int(n/8), a)
+            for n in range(1, 3):
+                sense.set_pixel(n, 6-n, w)
+    elif tM >= 495 and tM < 585:
+        switch[1] = 6
+        if switch[1] != ultimoSwitch[1]:
+            for n in range(len(ultimaImagem)):
+                if ultimaImagem[n] == [248, 252, 248]:
+                    sense.set_pixel(n%8, int(n/8), a)
+            for n in range(1, 3):
+                sense.set_pixel(n, 3, w)
+    elif tM >= 585 and tM < 675:
+        switch[1] = 7
+        if switch[1] != ultimoSwitch[1]:
+            for n in range(len(ultimaImagem)):
+                if ultimaImagem[n] == [248, 252, 248]:
+                    sense.set_pixel(n%8, int(n/8), a)
+            for n in range(1, 3):
+                sense.set_pixel(n, n, w)
+    else:
+        switch[1] = 8
+        if switch[1] != ultimoSwitch[1]:
+            for n in range(len(ultimaImagem)):
+                if ultimaImagem[n] == [248, 252, 248]:
+                    sense.set_pixel(n%8, int(n/8), a)
+            for n in range(1, 3):
+                sense.set_pixel(3, n, w)
+    
+    #Sobreposição do ponteiro das horas
+    if switch[0] == switch[1] and ultimoSwitch[0] != ultimoSwitch[1]:
+        i = 0
+        for pixel in sense.get_pixels():
+            if pixel == [248, 252, 0]:
+                if i%8 != 0 and i%8 != 6 and int(i/8) != 0 and int(i/8) != 6:
+                    sense.set_pixel(i%8, int(i/8), w)
+            i += 1
+    
+    #Atualização do ultimoSwitch[]
+    for n in range(len(ultimoSwitch)):
+        ultimoSwitch[n] = switch[n]
+        
+    #Atualização do ultimaImagem[]
+    ultimaImagem = sense.get_pixels()
+    
+    #Mostra temperatura e umidade (quando joystick é pressionado)
+    for event in sense.stick.get_events():
+        
+        if event.action == 'pressed':    #Quando detecta a pressão
+            
+            #Animação de saída do relógio
+            pixelsFora = []
+            while len(pixelsFora) < 64:
+                xPixel = randint(0, 7)
+                yPixel = randint(0, 7)
+                if [xPixel, yPixel] not in pixelsFora:
+                    sense.set_pixel(xPixel, yPixel, e)
+                    pixelsFora.append([xPixel, yPixel])
+                    sleep(0.005)
+                    
+            sleep(0.15)    #Descanso
+            
+            #Introduz o fundo azul
+            for n in range(7,-1,-1):
+                for m in range(8):
+                    sense.set_pixel(n, m, a)
+                sleep(0.05)
+            
+            #Mostra mensagem
+            sense.show_message('Temperatura: {}C, Umidade: {}%'.format(int(round(sense.get_temperature(), 0)),
+                                                                       int(round(sense.get_humidity(), 0))), 0.06, b, a)
+
+            #Remove o fundo azul
+            for n in range(7,-1,-1):
+                for m in range(8):
+                    sense.set_pixel(n, m, e)
+                sleep(0.05)
+                
+            sleep(0.2)    #Descanso
+            
+            #Introduz o relógio
+            sense.set_pixels(ultimaImagem)
