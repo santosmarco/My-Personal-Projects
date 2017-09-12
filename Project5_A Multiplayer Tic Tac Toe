@@ -1,0 +1,279 @@
+from sense_hat import SenseHat
+from time import sleep
+from random import *
+
+sense = SenseHat()
+sense.clear()
+
+class Game():
+    
+    def __init__(self):
+        self.board = [0, 0, 0,
+                      0, 0, 0,
+                      0, 0, 0]
+        self.grid_color = (255, 255, 255)
+        self.bkg_color = (0, 48, 72)
+        
+    def show_blank_board(self, senseHat):
+        for n in range(8):
+            for m in [2, 5]:
+                senseHat.set_pixel(m, n, self.grid_color)
+                senseHat.set_pixel(n, m, self.grid_color)
+                
+    def check_for_win(self, senseHat, player1, player2):
+        global game_ended
+        while True:
+            n = 0
+            rows = []
+            for n in range(0, 7, 3):
+                rows.append([self.board[n], self.board[n+1], self.board[n+2]])
+            columns = []
+            for n in range(3):
+                columns.append([self.board[n], self.board[n+3], self.board[n+6]])
+            for n in range(3):
+                if rows[n][0] == rows[n][1] == rows[n][2] and rows[n][0] != 0:
+                    if rows[n][0] == 1:
+                        color_to_blink = player1.color
+                        winner = player1.id
+                    else:
+                        color_to_blink = player2.color
+                        winner = player2.id
+                    for h in range(3):
+                        for k in [(0, 48, 72), color_to_blink]:
+                            sleep(0.1)
+                            if n == 0:
+                                y_to_consider = [0, 1]
+                            elif n == 1:
+                                y_to_consider = [3, 4]
+                            else:
+                                y_to_consider = [6, 7]
+                            for j in y_to_consider:
+                                for l in range(8):
+                                    if l != 2 and l != 5:
+                                        senseHat.set_pixel(l, j, k)
+                    self.win_animation(senseHat)
+                    senseHat.show_message('Player {} ganhou!'.format(winner), 0.05, color_to_blink, self.bkg_color)
+                    self.end_game(senseHat)
+            if game_ended:
+                break
+            for n in range(3):
+                if columns[n][0] == columns[n][1] == columns[n][2] and columns[n][0] != 0:
+                    if columns[n][0] == 1:
+                        color_to_blink = player1.color
+                        winner = player1.id
+                    else:
+                        color_to_blink = player2.color
+                        winner = player2.id
+                    for h in range(3):
+                        for k in [(0, 48, 72), color_to_blink]:
+                            sleep(0.1)
+                            if n == 0:
+                                x_to_consider = [0, 1]
+                            elif n == 1:
+                                x_to_consider = [3, 4]
+                            else:
+                                x_to_consider = [6, 7]
+                            for j in x_to_consider:
+                                for l in range(8):
+                                    if l != 2 and l != 5:
+                                        senseHat.set_pixel(j, l, k)
+                    self.win_animation(senseHat)
+                    senseHat.show_message('Player {} ganhou!'.format(winner), 0.05, color_to_blink, self.bkg_color)
+                    self.end_game(senseHat)
+            if game_ended:
+                break
+            if self.board[0] == self.board[4] == self.board[8] and self.board[0] != 0:
+                if self.board[0] == 1:
+                    color_to_blink = player1.color
+                    winner = player1.id
+                else:
+                    color_to_blink = player2.color
+                    winner = player2.id
+                for m in range(3):
+                    for n in [(0, 48, 72), color_to_blink]:
+                        sleep(0.1)
+                        for l in [0, 3, 6]:
+                            senseHat.set_pixel(l, l, n)
+                            senseHat.set_pixel(l+1, l, n)
+                            senseHat.set_pixel(l, l+1, n)
+                            senseHat.set_pixel(l+1, l+1, n)
+                self.win_animation(senseHat)
+                senseHat.show_message('Player {} ganhou!'.format(winner), 0.05, color_to_blink, self.bkg_color)
+                self.end_game(senseHat)
+            if game_ended:
+                break
+            if self.board[2] == self.board[4] == self.board[6] and self.board[2] != 0:
+                if self.board[2] == 1:
+                    color_to_blink = player1.color
+                    winner = player1.id
+                else:
+                    color_to_blink = player2.color
+                    winner = player2.id
+                for m in range(3):
+                    for n in [(0, 48, 72), color_to_blink]:
+                        sleep(0.1)
+                        for l in [[6, 0], [3, 3], [0, 6]]:
+                            senseHat.set_pixel(l[0], l[1], n)
+                            senseHat.set_pixel(l[0]+1, l[1], n)
+                            senseHat.set_pixel(l[0], l[1]+1, n)
+                            senseHat.set_pixel(l[0]+1, l[1]+1, n)
+                self.win_animation(senseHat)
+                senseHat.show_message('Player {} ganhou!'.format(winner), 0.05, color_to_blink, self.bkg_color)
+                self.end_game(senseHat)
+            if game_ended:
+                break
+            for element in self.board:
+                if element == 0:
+                    break
+            else:
+                self.win_animation(senseHat)
+                senseHat.show_message('Deu velha!', 0.05, (255, 255, 255), self.bkg_color)
+                self.end_game(senseHat)
+            break
+            
+    def win_animation(self, senseHat):
+        pixelsFora = []
+        while len(pixelsFora) < 64:
+            xPixel = randint(0, 7)
+            yPixel = randint(0, 7)
+            if [xPixel, yPixel] not in pixelsFora:
+                senseHat.set_pixel(xPixel, yPixel, 0, 0, 0)
+                pixelsFora.append([xPixel, yPixel])
+                sleep(0.005)
+        sleep(0.15)
+        
+    def end_game(self, senseHat):
+        global game_ended
+        for n in range(7,-1,-1):
+            for m in range(8):
+                sense.set_pixel(n, m, (0, 0, 0))
+            sleep(0.05)
+        game_ended = True
+                
+class Player():
+    
+    def __init__(self, personal_id, personal_color):
+        self.id = personal_id
+        self.color = personal_color
+        self.current_pos = 0
+        positions = []
+    
+    def choose_pos(self, senseHat, game):
+        free_positions = []
+        for n in range(9):
+            if game.board[n] == 0:
+                free_positions.append(n)
+        senseHat.set_pixel((free_positions[0]%3)*3, (free_positions[0]//3)*3, self.color)
+        senseHat.set_pixel(((free_positions[0]%3)*3)+1, (free_positions[0]//3)*3, self.color)
+        senseHat.set_pixel((free_positions[0]%3)*3, ((free_positions[0]//3)*3)+1, self.color)
+        senseHat.set_pixel(((free_positions[0]%3)*3)+1, ((free_positions[0]//3)*3)+1, self.color)
+        self.current_pos = free_positions[0]
+        while True:
+            i=0
+            event = senseHat.stick.wait_for_event()
+            if event.direction == 'right' and event.action == 'pressed':
+                self.move_right(senseHat, game)
+            elif event.direction == 'left' and event.action == 'pressed':
+                self.move_left(senseHat, game)
+            elif event.direction == 'middle' and event.action == 'pressed':
+                self.record_pos(senseHat, game)
+                break
+            
+    def move_right(self, senseHat, game):
+        free_positions = []
+        for n in range(9):
+            if game.board[n] == 0:
+                free_positions.append(n)
+        #Setando para branco
+        senseHat.set_pixel((self.current_pos%3)*3, (self.current_pos//3)*3, 0, 48, 72)
+        senseHat.set_pixel(((self.current_pos%3)*3)+1, (self.current_pos//3)*3, 0, 48, 72)
+        senseHat.set_pixel((self.current_pos%3)*3, ((self.current_pos//3)*3)+1, 0, 48, 72)
+        senseHat.set_pixel(((self.current_pos%3)*3)+1, ((self.current_pos//3)*3)+1, 0, 48, 72)
+        #Setando para a cor do player
+        if self.current_pos == free_positions[-1]:
+            self.current_pos = free_positions[0]
+            i = 0
+        else:
+            i = 1
+        senseHat.set_pixel((free_positions[free_positions.index(self.current_pos)+i]%3)*3, (free_positions[free_positions.index(self.current_pos)+i]//3)*3, self.color)
+        senseHat.set_pixel(((free_positions[free_positions.index(self.current_pos)+i]%3)*3)+1, (free_positions[free_positions.index(self.current_pos)+i]//3)*3, self.color)
+        senseHat.set_pixel((free_positions[free_positions.index(self.current_pos)+i]%3)*3, ((free_positions[free_positions.index(self.current_pos)+i]//3)*3)+1, self.color)
+        senseHat.set_pixel(((free_positions[free_positions.index(self.current_pos)+i]%3)*3)+1, ((free_positions[free_positions.index(self.current_pos)+i]//3)*3)+1, self.color)
+        self.current_pos = free_positions[free_positions.index(self.current_pos)+i]
+        
+    def move_left(self, senseHat, game):
+        free_positions = []
+        for n in range(9):
+            if game.board[n] == 0:
+                free_positions.append(n)
+        #Setando para branco
+        senseHat.set_pixel((self.current_pos%3)*3, (self.current_pos//3)*3, 0, 48, 72)
+        senseHat.set_pixel(((self.current_pos%3)*3)+1, (self.current_pos//3)*3, 0, 48, 72)
+        senseHat.set_pixel((self.current_pos%3)*3, ((self.current_pos//3)*3)+1, 0, 48, 72)
+        senseHat.set_pixel(((self.current_pos%3)*3)+1, ((self.current_pos//3)*3)+1, 0, 48, 72)
+        #Setando para a cor do player
+        if self.current_pos == free_positions[0]:
+            self.current_pos = free_positions[-1]
+            i = 0
+        else:
+            i = 1
+        senseHat.set_pixel((free_positions[free_positions.index(self.current_pos)-i]%3)*3, (free_positions[free_positions.index(self.current_pos)-i]//3)*3, self.color)
+        senseHat.set_pixel(((free_positions[free_positions.index(self.current_pos)-i]%3)*3)+1, (free_positions[free_positions.index(self.current_pos)-i]//3)*3, self.color)
+        senseHat.set_pixel((free_positions[free_positions.index(self.current_pos)-i]%3)*3, ((free_positions[free_positions.index(self.current_pos)-i]//3)*3)+1, self.color)
+        senseHat.set_pixel(((free_positions[free_positions.index(self.current_pos)-i]%3)*3)+1, ((free_positions[free_positions.index(self.current_pos)-i]//3)*3)+1, self.color)
+        self.current_pos = free_positions[free_positions.index(self.current_pos)-i]
+        
+    def record_pos(self, senseHat, game):
+        game.board[self.current_pos] = self.id
+        for m in range(3):
+            for n in [(0, 48, 72), self.color]:
+                sleep(0.1)
+                senseHat.set_pixel((self.current_pos%3)*3, (self.current_pos//3)*3, n)
+                senseHat.set_pixel(((self.current_pos%3)*3)+1, (self.current_pos//3)*3, n)
+                senseHat.set_pixel((self.current_pos%3)*3, ((self.current_pos//3)*3)+1, n)
+                senseHat.set_pixel(((self.current_pos%3)*3)+1, ((self.current_pos//3)*3)+1, n)
+
+while True:
+    
+    game_ended = False
+
+    game = Game()
+    player1 = Player(1, (240, 124, 0))
+    player2 = Player(2, (117, 171, 0))
+    
+    for n in range(8):
+        i = n
+        p = 0
+        while p != n+1:
+            pixel_color = game.bkg_color
+            if i == 2 or i == 5 or p == 2 or p == 5:
+                pixel_color = (255, 255, 255)
+            sense.set_pixel(i, p, pixel_color)
+            i -= 1
+            p += 1
+        sleep(0.02)
+    for n in range(1, 8):
+        i = 7
+        p = n
+        while i != n-1:
+            pixel_color = game.bkg_color
+            if i == 2 or i == 5 or p == 2 or p == 5:
+                pixel_color = (255, 255, 255)
+            sense.set_pixel(i, p, pixel_color)
+            i -= 1
+            p += 1
+        sleep(0.02)
+    sleep(0.4)
+
+    while True:
+        game.show_blank_board(sense)
+        player1.choose_pos(sense, game)
+        game.check_for_win(sense, player1, player2)
+        if game_ended == True:
+            break
+        player2.choose_pos(sense, game)
+        game.check_for_win(sense, player1, player2)
+        if game_ended == True:
+            break
+    
+    sleep(0.4)
