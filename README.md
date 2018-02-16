@@ -3,8 +3,10 @@ Here you'll find my main Raspberry Pi's Sense HAT projects. From a simple colorf
 
 # The projects
 ###### 1. [The Always Up Arrow Game](https://goo.gl/8xrnVq)
-   A game in which you have random arrows being showed in your Sense HAT's 8x8 pixel matrix and your goal is to rotate your Sense HATed Raspberry Pi in order to let the arrow be always pointing up.
-   // Português: Um jogo no qual você terá setas aleatórias sendo mostradas no quadro 8x8 de pixels do seu Sense HAT, e seu objetivo é rotacionar o seu Raspberry Pi equipado com um Sense HAT a fim de deixar as setas sempre apontadas para cima.
+- English
+  - A game in which you have random arrows being showed in your Sense HAT's 8x8 pixel matrix and your goal is to rotate your Sense HATed Raspberry Pi in order to let the arrow be always pointing up.
+- Português
+  - Um jogo no qual você terá setas aleatórias sendo mostradas no quadro 8x8 de pixels do seu Sense HAT, e seu objetivo é rotacionar o seu Raspberry Pi equipado com um Sense HAT a fim de deixar as setas sempre apontadas para cima.
    
 ###### 2. [Random Sparkles](https://goo.gl/qG8D6n)
    A simple application in which you have random LEDs being turned on on your Sense HAT's pixel matrix. For each new LED, you'll notice an increase on the LED's creation refresh time. Once every LED is on, they'll start changing their colors.
