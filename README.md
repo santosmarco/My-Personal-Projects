@@ -1,4 +1,4 @@
-# My Raspberry Pi's Sense HAT projects
+# My Personal Projects
 Here you'll find my main Raspberry Pi's Sense HAT projects. From a simple colorful sprinkles generator to some games.
 
 # My Sense HAT projects / *Meus projetos em Sense HAT*
