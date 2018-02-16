@@ -1,5 +1,12 @@
 # My Personal Projects
-Here you'll find my main Raspberry Pi's Sense HAT projects. From a simple colorful sprinkles generator to some games.
+Here you'll find my main personal projects. From a simple colorful sprinkles generator to specialized bots to complex games.
+
+# My Python general projects / *Meus projetos em Python*
+###### 1. [MathWake](https://goo.gl/8xrnVq)
+- *English*
+  - An alarm clock that records (adds/removes/edits) alarms and rings when needed. The only way to stop its ringing is by correctly solving at least 3 math equations.
+- *Português*
+  - Um despertador que salva (adiciona/remove/edita) alarmes e toca quando necessário. A única forma de desativa-lo é solucionando pelo menos 3 equações matemáticas.
 
 # My Sense HAT projects / *Meus projetos em Sense HAT*
 ###### 1. [The Always Up Arrow Game](https://goo.gl/8xrnVq)
