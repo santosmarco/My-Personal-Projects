@@ -1,7 +1,7 @@
 # My Raspberry Pi's Sense HAT projects
 Here you'll find my main Raspberry Pi's Sense HAT projects. From a simple colorful sprinkles generator to some games.
 
-# The projects
+# My Sense HAT projects / *Meus projetos em Sense HAT*
 ###### 1. [The Always Up Arrow Game](https://goo.gl/8xrnVq)
 - *English*
   - A game in which you have random arrows being showed in your Sense HAT's 8x8 pixel matrix and your goal is to rotate your Sense HATed Raspberry Pi in order to let the arrow be always pointing up.
