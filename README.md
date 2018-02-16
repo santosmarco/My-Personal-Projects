@@ -15,22 +15,26 @@ Here you'll find my main Raspberry Pi's Sense HAT projects. From a simple colorf
   - Um simples aplicativo no qual você verá LEDs do quadro de pixels do seu Sense HAT sendo ligados aleatoriamente. Para cada novo LED, você perceberá um aumento no tempo de recarga da criação dos próximos LEDs. Quando todos os LEDs estiverem acesos, eles começarão a mudar suas cores.
    
 ###### 3. [A Digitally Analogic Clock](https://goo.gl/iPe3U2)
-   A simple analogic clock that reads the Pi's clock and shows an analogic clock in its Sense HAT, with a pointer for the hours and another one for the minutes.
-   // Português: Um relógio analógico simples que interpreta o relógio do Raspberry Pi e mostra em seu Sense HAT o tempo em formato analógico, com um ponteiro para as horas e outro para os minutos.
+- *English*
+  - A simple analogic clock that reads the Pi's clock and shows an analogic clock in its Sense HAT, with a pointer for the hours and another one for the minutes.
+- *Português*
+  - Um relógio analógico simples que interpreta o relógio do Raspberry Pi e mostra em seu Sense HAT o tempo em formato analógico, com um ponteiro para as horas e outro para os minutos.
 
 ###### 4. [A Simple Yet Complex Pong Game](https://goo.gl/fmq2N9)
-   Well, a pong game. But AI-powered and playable from a Pi's Sense HAT.
-   // Português: Um jogo de ping-pong. Mas dotado de inteligência artificial e jogável a partir do Sense HAT de um Raspberry Pi.
+- *English*
+  - Well, a pong game. But AI-powered and playable from a Pi's Sense HAT.
+- *Português*
+  - Um jogo de ping-pong. Mas dotado de inteligência artificial e jogável a partir do Sense HAT de um Raspberry Pi.
 
 ###### 5. [A Multiplayer Tic Tac Toe](https://goo.gl/PB4nfA)
-**English**
-A round-based multiplayer tic-tac-toe game, playable from a Pi's Sense HAT.
-**Português**
-Um jogo-da-velha multiplayer, baseado em rounds e jogável a partir do Sense HAT de um Raspberry Pi.
+- *English*
+  - A round-based multiplayer tic-tac-toe game, playable from a Pi's Sense HAT.
+- *Português*
+  - Um jogo-da-velha multiplayer, baseado em rounds e jogável a partir do Sense HAT de um Raspberry Pi.
 
-# Disclaimer concerning my projects
-You're 100% free to use and share my codes, as long as you give me all of my so much deserved credits on them.
-You'll find my projects' descriptions on theirs commits of creation.
+# Authorship
+None of the projects listed above is authorshipped. I might have had some guidance during their programming. To all the people that have contributed with tutorials, third-party modules and incentive, my special thanks! None of this would have ever been possible without you.
+That said, feel free to use any and all of my codes accross your next projects.
 
 # Contact info
 Please find my contact info on my profile page.
