@@ -6,7 +6,7 @@ Here you'll find my main personal projects. From a simple colorful sprinkles gen
 - *English*
   - An alarm clock that records (adds/removes/edits) alarms and rings when needed. The only way to stop its ringing is by correctly solving at least 3 math equations.
 - *Português*
-  - Um despertador que salva (adiciona/remove/edita) alarmes e toca quando necessário. A única forma de desativa-lo é solucionando pelo menos 3 equações matemáticas.
+  - Um despertador que salva (adiciona/remove/edita) alarmes e toca quando necessário. A única forma de desativa-lo é solucionando pelo menos 3 equações matemáticas.
 
 # My Sense HAT projects / *Meus projetos em Sense HAT*
 ###### 1. [The Always Up Arrow Game](https://goo.gl/8xrnVq)
@@ -39,7 +39,7 @@ Here you'll find my main personal projects. From a simple colorful sprinkles gen
 - *Português*
   - Um jogo-da-velha multiplayer, baseado em rounds e jogável a partir do Sense HAT de um Raspberry Pi.
 
-# Authorship
+# Authorship / *Autoria*
 None of the projects listed above is authorshipped. I might have had some guidance during their programming. To all the people that have contributed with tutorials, third-party modules and incentive, my special thanks! None of this would have ever been possible without you.
 That said, feel free to use any and all of my codes accross your next projects.
 
