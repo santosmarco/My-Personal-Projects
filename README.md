@@ -12,7 +12,7 @@ Here you'll find my main personal projects. From a simple colorful sprinkles gen
 - *English*
   - A cryptocurrency-related Telegram bot that runs on Python (that's why CrPytoBot). Get a coin's price/market cap/24h-volume, cryptocurrency-related jokes, market data and automatically pull news as soon as they come out -- all from your Telegram app.
 - *Português*
-  - Um bot de criptomoedas para Telegram que roda em Python (por isso CrPytoBot). Obtenha o preço/a capitalização de mercado/o volume nas últimas 24h de uma moeda, piadas relacionadas às criptomoedas, dados do mercado e receba notícias automaticamente, assim que elas ficarem disponíveis -- tudo isso a partir do seu aplicativo do Telegram. 
+  - Um bot de criptomoedas para Telegram que roda em Python (por isso CrPytoBot). Obtenha o preço/a capitalização de mercado/o volume nas últimas 24h de uma moeda, piadas relacionadas às criptomoedas, dados do mercado e receba notícias automaticamente, assim que elas ficarem disponíveis -- tudo isso a partir do seu aplicativo do Telegram. 
 
 # My Sense HAT projects / *Meus projetos em Sense HAT*
 ###### 1. [The Always Up Arrow Game](https://goo.gl/8xrnVq)
