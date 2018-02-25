@@ -2,11 +2,17 @@
 Here you'll find my main personal projects. From a simple colorful sprinkles generator to specialized bots to complex games.
 
 # My Python general projects / *Meus projetos em Python*
-###### 1. [MathWake](https://goo.gl/8xrnVq)
+###### 6. [MathWake](https://goo.gl/SaHZEv)
 - *English*
   - An alarm clock that records (adds/removes/edits) alarms and rings when needed. The only way to stop its ringing is by correctly solving at least 3 math equations.
 - *Português*
   - Um despertador que salva (adiciona/remove/edita) alarmes e toca quando necessário. A única forma de desativa-lo é solucionando pelo menos 3 equações matemáticas.
+  
+###### 7. [CrPytoBot](https://goo.gl/Y1FkpK)
+- *English*
+  - A cryptocurrency-related Telegram bot that runs on Python (that's why CrPytoBot). Get a coin's price/market cap/24h-volume, cryptocurrency-related jokes, market data and automatically pull news as soon as they come out -- all from your Telegram app.
+- *Português*
+  - Um bot de criptomoedas para Telegram que roda em Python (por isso CrPytoBot). Obtenha o preço/a capitalização de mercado/o volume nas últimas 24h de uma moeda, piadas relacionadas às criptomoedas, dados do mercado e receba notícias automaticamente, assim que elas ficarem disponíveis -- tudo isso a partir do seu aplicativo do Telegram. 
 
 # My Sense HAT projects / *Meus projetos em Sense HAT*
 ###### 1. [The Always Up Arrow Game](https://goo.gl/8xrnVq)
