@@ -45,7 +45,7 @@ Here you'll find my main personal projects. From a simple colorful sprinkles gen
 - *Português*
   - Um jogo-da-velha multiplayer, baseado em rounds e jogável a partir do Sense HAT de um Raspberry Pi.
 
-# Authorship / *Autoria*
+# Authorship
 None of the projects listed above is authorshipped. I might have had some guidance during their programming. To all the people that have contributed with tutorials, third-party modules and incentive, my special thanks! None of this would have ever been possible without you.
 Feel free to use any and all of my codes across your next projects.
 
