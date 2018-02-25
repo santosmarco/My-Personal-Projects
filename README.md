@@ -41,7 +41,7 @@ Here you'll find my main personal projects. From a simple colorful sprinkles gen
 
 # Authorship / *Autoria*
 None of the projects listed above is authorshipped. I might have had some guidance during their programming. To all the people that have contributed with tutorials, third-party modules and incentive, my special thanks! None of this would have ever been possible without you.
-That said, feel free to use any and all of my codes accross your next projects.
+Feel free to use any and all of my codes across your next projects.
 
 # Contact info
-Please find my contact info on my profile page.
+Please find my contact info in my profile page.
