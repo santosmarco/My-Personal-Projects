@@ -18,7 +18,7 @@ Here you'll find my main personal projects. From a simple colorful sprinkles gen
 - *English*
   - A Twitter bot that scraps Bitcoin-related news portals for updates on the crypto universe.
 - *Português*
-  - Um bot para Twitter que coleta informações de portais de notícia relacionados ao Bitcoin e as posta.
+  - Um bot para Twitter que coleta informações de portais de notícia relacionados ao Bitcoin e as posta.
 
 # My Sense HAT projects / *Meus projetos em Sense HAT*
 ###### 1. [The Always Up Arrow Game](https://goo.gl/8xrnVq)
