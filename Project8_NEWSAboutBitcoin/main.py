@@ -73,6 +73,7 @@ class TwitterBot():
         except Exception as err:
             print('>>> ({}) Error posting status: '.format(self.get_time())
                   + '{}'.format(err))
+            return
         # Adds status to posts database
         with shelve.open('posts') as posts_db:
             posts_db[portal_id] = status
