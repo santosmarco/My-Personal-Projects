@@ -12,7 +12,7 @@ from random import randint
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
-u = telegram.ext.Updater(token='529975103:AAEi_RD19MaQIdhfqn55nwTF-3NUKjVEqws')
+u = telegram.ext.Updater(token='YOUR_TELEGRAM_TOKEN_HERE')
 d = u.dispatcher
 j = u.job_queue
 
