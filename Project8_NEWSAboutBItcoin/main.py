@@ -1,3 +1,5 @@
+# THIS IS BOT IS STILL RUNNING!!!! FOLLOW ME ON TWITTER: @NEWSABOUTBTC
+
 import coinlib
 import News
 import shelve
@@ -11,10 +13,7 @@ class TwitterBot():
 
     def __init__(self):
         self.controller = twython.Twython(
-            '1xbJV1KMEe5hWXNwA1kZXCibL',
-            'nIpPMbapjevsFYsujwQaVwcghiHOkDI1gg973hBgW9z4VFWEgN',
-            '954193901732159489-2saDt1hOYhSRIVvnjK4KuBxHIcXHLuZ',
-            'rXE51GryZWmeWRAqWbafc65PfuVJFrcnR5Fn3dGa366jM'
+            'YOUR_TWITTER_TOKENS_HERE',
             )
         self.news_controller = News.News()
         print('>>> ({}) Bot started.'.format(self.get_time()))
