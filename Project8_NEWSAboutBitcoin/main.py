@@ -1,5 +1,3 @@
-# THIS BOT IS STILL RUNNING!!!! FOLLOW ME ON TWITTER: @NEWSABOUTBTC
-
 import coinlib
 import News
 import shelve
@@ -7,13 +5,17 @@ import time
 import twython
 import datetime
 import random
+import string
 
 
 class TwitterBot():
 
     def __init__(self):
         self.controller = twython.Twython(
-            'YOUR_TWITTER_TOKENS_HERE',
+            '1xbJV1KMEe5hWXNwA1kZXCibL',
+            'nIpPMbapjevsFYsujwQaVwcghiHOkDI1gg973hBgW9z4VFWEgN',
+            '954193901732159489-2saDt1hOYhSRIVvnjK4KuBxHIcXHLuZ',
+            'rXE51GryZWmeWRAqWbafc65PfuVJFrcnR5Fn3dGa366jM'
             )
         self.news_controller = News.News()
         print('>>> ({}) Bot started.'.format(self.get_time()))
@@ -51,7 +53,8 @@ class TwitterBot():
                 else:
                     if tag.startswith('#'):
                         tag = tag[1:]
-                    tags += '#{} '.format(tag)
+                    if all([x in string.ascii_lowercase for x in tag]):
+                        tags += '#{} '.format(tag)
         if len(tags) >= 1:
             return '{}\n\n{}\n{}'.format(title, tags, link)
         return '{}\n\n{}'.format(title, link)
