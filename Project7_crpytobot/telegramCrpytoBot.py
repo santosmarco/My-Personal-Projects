@@ -16,9 +16,9 @@ u = telegram.ext.Updater(token='YOUR_TELEGRAM_TOKEN_HERE')
 d = u.dispatcher
 j = u.job_queue
 
-reddit = praw.Reddit(client_id='4xljC7_izsCz0A',
-                     client_secret='NC8r26voiint8p3NQTkxAX5vkXE',
-                     user_agent='CrpytoBotAdmin 0.1'
+reddit = praw.Reddit(client_id='YOUR_REDDIT_CLIENT_ID_HERE',
+                     client_secret='YOUR_REDDIT_CLIENTE_SECRET_HERE',
+                     user_agent='YOUR_REDDIT_USER_AGENT_HERE'
                      )
 
 if hasattr(ssl, '_create_unverified_context'):
