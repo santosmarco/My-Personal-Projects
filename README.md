@@ -19,6 +19,13 @@ Here you'll find my main personal projects. From a simple colorful sprinkles gen
   - A Twitter bot that scraps Bitcoin-related news portals for updates on the crypto universe.
 - *Português*
   - Um bot para Twitter que coleta informações de portais de notícia relacionados ao Bitcoin e as posta.
+  
+# My GUI/Python projects / *Meus projetos em GUI/Python*
+###### 9. [Mexe-MexeNotepad](https://goo.gl/4pBKPM)
+- *English*
+  - A fully working, bug-free GUI application to track each players' points on a game of Mexe-Mexe, a traditional playing cards game in Brazil.
+- *Português*
+  - Uma aplicação em GUI totalmente funcional e sem bugs para acompanhar a pontuação de cada jogador em um jogo de Mexe-Mexe.
 
 # My Sense HAT projects / *Meus projetos em Sense HAT*
 ###### 1. [The Always Up Arrow Game](https://goo.gl/8xrnVq)
